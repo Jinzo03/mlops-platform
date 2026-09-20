@@ -5,3 +5,8 @@ mlruns/1/3357633f5bfc4cccb5bea9e7f158fae1/artifacts/model/conda.yaml
 mlruns/1/3357633f5bfc4cccb5bea9e7f158fae1/artifacts/model/MLmodel
 mlruns/1/3357633f5bfc4cccb5bea9e7f158fae1/artifacts/model/model.pkl
 mlruns/
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/terraform.tfvars
+.env
