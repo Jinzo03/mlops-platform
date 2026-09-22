@@ -7,3 +7,8 @@ feast==0.66.0
 prometheus-fastapi-instrumentator==8.1.0
 uvicorn==0.53.0
 pydantic==2.13.4
+onnxruntime==1.17.1
+transformers==5.16.1
+optimum[onnxruntime]==1.17.1
+torch==2.5 --extra-index-url https://download.pytorch.org/whl/cpu
+python-dotenv==1.0.1
