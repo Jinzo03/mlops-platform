@@ -4,3 +4,6 @@ pandas==2.3.3
 numpy==2.2.6
 boto3==1.43.98
 feast==0.66.0
+prometheus-fastapi-instrumentator==8.1.0
+uvicorn==0.53.0
+pydantic==2.13.4
