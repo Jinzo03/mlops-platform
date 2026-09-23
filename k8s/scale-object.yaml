@@ -1,0 +1,36 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: sqs-embedding-worker-scaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: embedding-worker
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  cooldownPeriod: 30
+  pollingInterval: 15
+  triggers:
+  - type: aws-sqs
+    metadata:
+      queueURL: "https://sqs.us-east-1.amazonaws.com/233084606401/embedding-request-queue"
+      queueLength: "5"
+      awsRegion: "us-east-1"
+      identityOwner: operator
+    authenticationRef:
+      name: keda-aws-auth
+
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-aws-auth
+  namespace: default
+spec:
+  secretTarget:
+  - parameter: awsAccessKeyId
+    name: aws-sqs-credentials
+    key: AWS_ACCESS_KEY_ID
+  - parameter: awsSecretAccessKey
+    name: aws-sqs-credentials
+    key: AWS_SECRET_ACCESS_KEY

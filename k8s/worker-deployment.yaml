@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: embedding-worker
+  namespace: default
+spec:
+  replicas: 0 # KEDA controls scaling from 0
+  selector:
+    matchLabels:
+      app: embedding-worker
+  template:
+    metadata:
+      labels:
+        app: embedding-worker
+    spec:
+      containers:
+      - name: worker
+        image: 233084606401.dkr.ecr.us-east-1.amazonaws.com/mlops-worker:latest
+        command: ["python", "src/worker.py"]
+        env:
+        - name: SQS_QUEUE_URL
+          value: "https://sqs.us-east-1.amazonaws.com/233084606401/embedding-request-queue"
+        - name: AWS_DEFAULT_REGION
+          value: "us-east-1"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-sqs-credentials
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-sqs-credentials
+              key: AWS_SECRET_ACCESS_KEY

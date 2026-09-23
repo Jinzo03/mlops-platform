@@ -13,3 +13,7 @@ terraform/terraform.tfvars
 data/
 src/__pycache__/
 models/
+terraform/.terraform.lock.hcl
+terraform/.terraform.tfstate.lock.info
+terraform/.terraform.lock.hcl
+k8s/aws-secret.yaml
